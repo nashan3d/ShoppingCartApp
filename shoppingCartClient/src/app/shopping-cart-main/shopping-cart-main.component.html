@@ -1,0 +1,62 @@
+<div class="jumbotron">
+    <h1 class="display-4 text-center">Big City Toys House</h1>
+</div>
+
+<table class="table-light text-center justify-center m-5">
+    <thead>
+        <td *ngFor="let category of service.listProductCategory">
+            <h3 class="m-2" (click)="categorySelected(category.id)">{{category.categoryName}}</h3> 
+        </td>
+    </thead>
+</table>
+
+<h3>Products</h3>
+
+<div class="row">
+    <ul >
+        <li *ngFor="let item of service.listProducts" style="display: inline;float:left;">
+            <div class="card m-3" style="width: 18rem;" >
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{item.productName}}</h5>
+                  <p class="card-text">{{item.price}}</p>
+                  <a href="#" class="btn btn-primary" (click)="addToCart(item)">Add to Cart</a>
+                </div>
+            </div>
+        </li>
+       
+    </ul>
+</div>
+
+<div class="row">    
+    <div class="container">
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price(Each)</th>
+                    <th>Item Total</th>
+                    <th>Remove Item</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cartItem of service.listCarts"> 
+                    <td>{{cartItem.itemName}}</td>
+                    <td>{{cartItem.price}}</td>
+                    <td>
+                        <input type="number" [(ngModel)]="cartItem.quantity" (change)="quantityChange(service.listCarts)" [width]="20">
+                    </td>
+                    <td>{{cartItem.price*cartItem.quantity}}</td>
+                    <td>
+                        <i class="far fa-trash-alt fa-lg text-danger" (click)="deleteCartItem(cartItem.id)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <span><b>Order Total: {{service.orderTotal}}</b></span>
+    </div>
+</div>
+
+
